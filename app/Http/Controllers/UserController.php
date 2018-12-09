@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Models\User;
 
 class UserController extends Controller
@@ -28,7 +29,7 @@ class UserController extends Controller
             'uname'=>$request->name,
             'email'=>$request->email,
             'uaddress'=>$request->address,
-            'password_hash'=>bcrypt($request->password),
+            'password'=>bcrypt($request->password),
         ]);
 
         session()->flash('Success','Welcome to oingo');

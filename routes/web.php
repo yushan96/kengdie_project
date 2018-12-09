@@ -17,4 +17,9 @@ Route::get('/', function () {
 
 Route::get('/','StaticPagesController@index')->name('index');
 Route::get('/signup','UserController@create')->name('signup');
-Route::resource('User','UserController');
+
+Route::resource('users','UserController');
+
+Route::get('login', 'SessionsController@create')->name('login');
+Route::post('login', 'SessionsController@store')->name('login');
+Route::delete('logout', 'SessionsController@destroy')->name('logout');
