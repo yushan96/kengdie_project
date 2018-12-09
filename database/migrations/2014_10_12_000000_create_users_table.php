@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->varchar('uname');
             $table->varchar('uemail')->unique();
             $table->varchar('uaddress');
-            $table->varchar('password_hash');
+            $table->varchar('password');
         });
     }
 
