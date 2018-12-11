@@ -9,6 +9,8 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $table='User';
+
+    protected $primaryKey='uid';
     /**
      * The attributes that are mass assignable.
      *
@@ -17,8 +19,6 @@ class User extends Authenticatable
     protected $fillable = [
         'uname', 'email','uaddress', 'password',
     ];
-
-    protected $primaryKey='uid';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -30,6 +30,15 @@ class User extends Authenticatable
     ];
 
     //public $timestamps = false;
+    public function notes()
+    {
+        return $this->hasMany(Note::class,$this->primaryKey,'uid');
+    }
+
+    public function feed()
+    {
+        return $this->notes()->orderBy('created_at','desc');
+    }
 
 
 }

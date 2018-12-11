@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/','StaticPagesController@index')->name('index');
+Route::get('/','StaticPagesController@home')->name('home');
 Route::get('/signup','UserController@create')->name('signup');
 
 Route::resource('users','UserController');
@@ -23,3 +23,7 @@ Route::resource('users','UserController');
 Route::get('login', 'SessionsController@create')->name('login');
 Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
+
+Route::resource('notes', 'NotesController', ['only' => ['store', 'destroy']]);
+
+Route::get('/notes/{note}/tags','NotesController@tags')->name('notes.tags');

@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Models\Note;
+use Auth;
 
 class StaticPagesController extends Controller
 {
-    public function index()
+    public function home()
     {
-        return view('static_pages/index');
+        $feed_items=[];
+        if(Auth::check())
+        {
+            $feed_items=Auth::user()->feed()->paginate(10);
+        }
+        return view('static_pages/home', compact('feed_items'));
     }
     //
 }

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->varchar('uemail')->unique();
             $table->varchar('uaddress');
             $table->varchar('password');
+            $table->rememberToken();
         });
     }
 
