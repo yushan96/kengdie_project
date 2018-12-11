@@ -22,7 +22,13 @@ class UserPolicy
 
     public function unfriend(User $currentUser, User $user)
     {
-        return Friendship::isfriend($currentUser,$user);
+        return Friendship::isFriend($currentUser,$user);
+    }
+
+    public function befriend(User $currentUser, User $user)
+    {
+        //todo 如果是已经发送请求了，区分一下
+        return !Friendship::isFriend($currentUser,$user);
     }
 
 }

@@ -9,4 +9,11 @@
             <button type="submit" class="btn btn-sm btn-danger delete-btn">删除</button>
         </form>
     @endcan
+
+    @can('befriend',$user)
+        <form action="{{route('user.befriend',$user->uid)}}" method="POST">
+            {{csrf_field()}}
+            <button type="'submit" class="btn">Add Friend</button>
+        </form>
+    @endcan
 </li>
