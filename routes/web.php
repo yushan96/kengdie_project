@@ -27,3 +27,7 @@ Route::delete('logout', 'SessionsController@destroy')->name('logout');
 Route::resource('notes', 'NotesController', ['only' => ['store', 'destroy']]);
 
 Route::get('/notes/{note}/tags','NotesController@tags')->name('notes.tags');
+
+Route::get('/users/{user}/friends','UserController@friends')->name('user.friends');
+Route::delete('/users/{user}/friends','UserController@unfriend')->name('user.unfriend');
+
