@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\User;
+use App\Models\Friendship;
 
 class UserPolicy
 {
@@ -13,4 +14,15 @@ class UserPolicy
     {
         return $currentUser->id === $user->id;
     }
+
+    public function destroy(User $currentUser, User $user)
+    {
+        return $currentUser->is_admin && $currentUser->uid !== $user->uid;
+    }
+
+    public function unfriend(User $currentUser, User $user)
+    {
+        return Friendship::isfriend($currentUser,$user);
+    }
+
 }
