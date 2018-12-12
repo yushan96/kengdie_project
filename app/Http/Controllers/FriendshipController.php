@@ -23,28 +23,33 @@ class FriendshipController extends Controller
         return view('users.show_friend_requests',compact('requests','title'));
     }
 
-    public function storeRequest(Request $request)
+    public function acceptRequest(User $user, Request $request)
     {
-        $this->validate($request,[
-            'uid' =>'required',
-        ]);
+        $friendship=Friendship::where('uid1','=',Auth::user()->uid)->
+            where('uid2',$user->uid)->first();
 
-        $friendship=Friendship::create([
-            'uid1'=> Auth::user()->uid,
-            'uid2'=> $request['uid']]);
+        $friendship->status=1;
+        $friendship->save();
+        Friendship::create([
+            'uid1'=>$user->uid,
+            'uid2'=>Auth::user()->uid,
+            'status'=>1,
+        ]);
+        session()->flash('success','Accept friend request success!');
         return redirect()->back();
     }
 
-//
-//    public function denyRequest($user)
-//    {
-//
-//    }
-//
-//    public function acceptRequest($user)
-//    {
-//
-//    }
+
+
+    public function denyRequest(User $user, Request $request)
+    {
+        Friendship::where('uid1','=',Auth::user()->uid)->
+        where('uid2',$user->uid)->delete();
+        session()->flash('success','Deny friend request success!');
+        return redirect()->back();
+    }
+
+
 
 
 //    public function request($user_id)

@@ -13,7 +13,7 @@
     @can('befriend',$user)
         <form action="{{route('user.befriend',$user->uid)}}" method="POST">
             {{csrf_field()}}
-            <button type="'submit" class="btn">Add Friend</button>
+            <button type="submit" class="btn">Add Friend</button>
         </form>
     @endcan
 </li>

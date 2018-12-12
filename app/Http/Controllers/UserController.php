@@ -112,8 +112,13 @@ class UserController extends Controller
     public function befriend(User $user)
     {
         $this->authorize('befriend',$user);
-        Friendship::befriend(Auth::user(),$user);
+        Friendship::befriend($user,Auth::user());
         session()->flash('success','send Friend request success!');
         return redirect()->back();
+    }
+
+    public function map()
+    {
+        return view('map');
     }
 }

@@ -26,6 +26,9 @@ class Friendship extends Model
     {
         $friendship=Friendship::where('uid1','=',$user1->uid)->where('uid2','=',$user2->uid)->where('status','=',1);
         $friendship->delete();
+        $friendship=Friendship::where('uid1','=',$user2->uid)->where('uid2','=',$user1->uid)->where('status','=',1);
+        $friendship->delete();
+
     }
 
     static public function befriend(User $user1, User $user2)

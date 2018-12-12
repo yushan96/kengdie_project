@@ -36,3 +36,6 @@ Route::get('/users/{user}/friend-requests','FriendshipController@requests')->nam
 Route::post('/users/{user}/friend-requests','FriendshipController@acceptRequest')->name('friendship.acceptRequest');
 Route::delete('/users/{user}/friend-requests','FriendshipController@denyRequest')->name('friendship.denyRequest');
 
+
+Route::get('/map','UserController@map')->name('map');
+
