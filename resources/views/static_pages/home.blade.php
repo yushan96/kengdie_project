@@ -4,9 +4,9 @@
     @if (Auth::check())
         <div class="row">
             <div class="col-md-8">
-                <section class="notes_form">
-                    @include('shared._note_form')
-                </section>
+                {{--<section class="notes_form">--}}
+                    {{--@include('shared._note_form')--}}
+                {{--</section>--}}
                 <h3>Note list</h3>
                 @include('shared._feed')
             </div>

@@ -79,7 +79,7 @@ class UserController extends Controller
 
         session()->flash('success', 'Update success！');
 
-        return redirect()->route('users.show', $user->uid);
+        return redirect()->route('/', $user->uid);
     }
 
 

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Note;
 use App\Models\Note_Tag;
+use App\Models\NoteRepeat;
 use Auth;
 
 class NotesController extends Controller
@@ -27,12 +28,18 @@ class NotesController extends Controller
             'notetext' => 'required|max:1000',
         ]);
 
-        $noteid=Auth::user()->notes()->insertGetId([
+        $uid=Auth::user()->id;
+
+        $note=Auth::user()->notes()->create([
+            'uid' => $uid,
             'notetext' => $request->notetext,
             'begin_date'=>$request->begin_date,
             'end_date'=>$request->end_date,
             'permission'=>$request->permission,
-        ],'noteid');
+            'created_at'=>date('Y-m-d H:i:s'),
+        ]);
+
+        $noteid=$note->noteid;
 
         $tag=$request->input('tag');
 
@@ -43,7 +50,35 @@ class NotesController extends Controller
             $note_tag->save();
         }
 
-        return redirect()->back();
+        if($request->repeat_year>0 || $request->repeat_month>0 || $request->week>0){
+            $noterepeat=new NoteRepeat;
+            $noterepeat->noteid = $noteid;
+            $noterepeat->repeat_start=$request->repeat_start;
+            $noterepeat->repeat_interval=-1;
+            $noterepeat->repeat_year=$request->repeat_year;
+            $noterepeat->repeat_month=$request->repeat_month;
+            $noterepeat->repeat_week=$request->repeat_week;
+            $noterepeat->repeat_weekday=$request->repeat_weekday;
+            $noterepeat->day_start=$request->day_start;
+            $noterepeat->day_end=$request->day_end;
+            $noterepeat->save();
+        }
+        else{
+            $noterepeat=new NoteRepeat;
+            $noterepeat->noteid = $noteid;
+            $noterepeat->repeat_start=$request->repeat_start;
+            $noterepeat->repeat_interval=$request->repeat_interval;
+            $noterepeat->repeat_year=-1;
+            $noterepeat->repeat_month=-1;
+            $noterepeat->repeat_week=-1;
+            $noterepeat->repeat_weekday=-1;
+            $noterepeat->day_start=$request->day_start;
+            $noterepeat->day_end=$request->day_end;
+            $noterepeat->save();
+            session()->flash('success', $request->interval);
+        }
+
+        return redirect()->route('users.show',Auth::user()->uid);
     }
 
     public function destroy(Note $note)

@@ -25,5 +25,6 @@ Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 
 Route::resource('notes', 'NotesController', ['only' => ['store', 'destroy']]);
+Route::get('new_note','SessionsController@add_note')->name('note.new');
 
 Route::get('/notes/{note}/tags','NotesController@tags')->name('notes.tags');
