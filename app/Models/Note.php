@@ -29,25 +29,18 @@ class Note extends Model
         return $this->belongsToMany(Tag::class,'Note_Tag','noteid','tid')->get();
     }
 
-
-
-    public function add_tag($tids)
-    {
-        if(!is_array($tids))
-        {
-            $tids=compact('noteid');
-        }
-        $this->tags()->sync($tids,false);
-    }
-
-    public function has_tag($tids)
-    {
-        return $this->tags()->contains($tids);
-    }
-
     public function repeats()
     {
         return $this->hasMany(NoteRepeat::class,$this->primaryKey,'noteid')->get();
+    }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,$this->primaryKey,'noteid');
+    }
+
+    public function states()
+    {
+        return $this->belongsToMany(State::class,'Note_State','noteid','stateid');
     }
 }

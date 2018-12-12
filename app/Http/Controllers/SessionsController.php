@@ -50,4 +50,9 @@ class SessionsController extends Controller
         session()->flash('success', 'Sign out success！');
         return redirect('login');
     }
+
+    public  function add_note()
+    {
+        return view('notes.add');
+    }
 }

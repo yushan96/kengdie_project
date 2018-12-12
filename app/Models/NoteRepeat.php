@@ -19,6 +19,11 @@ class NoteRepeat extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'noteid', 'repeat_start','repeat_interval', 'repeat_year','repeat_month','repeat_week','repeat_weekday',
+        'day_start','day_end'
+    ];
+
     public function notes()
     {
         return $this->belongsTo(Note::class,'noteid','','')->get();

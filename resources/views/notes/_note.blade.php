@@ -21,6 +21,14 @@
                         <button type="submit" class="btn btn-sm btn-danger status-delete-btn">Delete</button>
                     </form>
                 @endcan
+
+                {{--reply list--}}
+                <div class="panel panel-default topic-reply">
+                    <div class="panel-body">
+                        @include('notes._reply_box',$note)
+                        @include('notes._reply_list',$comments=$note->comments()->with('user')->get())
+                    </div>
+                </div>
             </div>
         </div>
     </div>

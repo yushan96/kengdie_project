@@ -15,6 +15,9 @@
                                 <li><a href="{{ route('users.edit', Auth::user()->uid) }}">Edit profile</a></li>
                                 <li><a href="{{route('user.friends',Auth::user()->uid)}}">Friends </a></li>
                                 <li><a href="{{route('friendship.requests',Auth::user()->uid)}}">Friends Request</a></li>
+
+                                <li><a href="{{route('note.new',Auth::user()->uid)}}">Add new note</a></li>
+
                                 <li class="divider"></li>
                                 <li>
                                     <a id="logout" href="#">
