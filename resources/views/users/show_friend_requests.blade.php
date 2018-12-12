@@ -9,9 +9,17 @@
                 <li>
                     <img src="{{ $request->gravatar() }}" alt="{{ $request->uname }}" class="gravatar"/>
                     <a href="{{ route('users.show', $request->uid )}}" class="username">{{ $request->uname }}</a>
+
+                    <form action="{{route('friendship.acceptRequest',$request->uid)}}" method="POST">
+                        {{csrf_field()}}
+                        <button type="submit" class="btn">Accept</button>
+                    </form>
+                    <form action="{{route('friendship.denyRequest',$request->uid)}}" method="POST">
+                        {{csrf_field()}}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="btn btn-sm btn-danger delete-btn">Deny</button>
+                    </form>
                 </li>
-
-
             @endforeach
         </ul>
 

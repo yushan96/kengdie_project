@@ -45,6 +45,7 @@ class NotesController extends Controller
 
         $tag=$request->input('tag');
 
+        # todo 无tag会报错
         foreach ($tag as $tagid){
             $note_tag = new Note_Tag;
             $note_tag->noteid = $noteid;

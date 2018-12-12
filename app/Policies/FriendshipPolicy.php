@@ -22,7 +22,7 @@ class FriendshipPolicy
 
     public function destroy(User $user, Friendship $friendship)
     {
-        return $user->uid=$friendship->uid1;
+        return $user->uid===$friendship->uid1;
     }
 
 

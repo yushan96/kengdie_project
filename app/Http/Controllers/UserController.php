@@ -103,10 +103,22 @@ class UserController extends Controller
 
     public function unfriend(User $user)
     {
-//        $this->authorize('unfriend','user');
+        $this->authorize('unfriend',$user);
         Friendship::unfriend(Auth::user(),$user);
         session()->flash('success', 'unfriend success！');
         return redirect()->back();
     }
-    //
+
+    public function befriend(User $user)
+    {
+        $this->authorize('befriend',$user);
+        Friendship::befriend($user,Auth::user());
+        session()->flash('success','send Friend request success!');
+        return redirect()->back();
+    }
+
+    public function map()
+    {
+        return view('map');
+    }
 }
