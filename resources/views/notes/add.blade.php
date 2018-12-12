@@ -7,12 +7,23 @@
     {{ csrf_field() }}
     <div>
         <textarea class="form-control"  rows="8" placeholder="input something..." name="notetext">{{ old('content') }}</textarea>
-        <div class="form-group">
+        <div class="form-group" style="width: 30%; height: auto; display: inline ">
             <p><input type="checkbox" name="tag[]" value=1 >eating</p>
             <p><input type="checkbox" name="tag[]" value=2 >shopping</p>
             <p><input type="checkbox" name="tag[]" value=3 >entertainment</p>
             <p><input type="checkbox" name="tag[]" value=4 >me</p>
             <p><input type="checkbox" name="tag[]" value=5 >holiday</p>
+        </div>
+        <div style="width: 50%; height: auto; display: inline ">
+            <div>
+                Set a state for you note:
+            </div>
+            <br>
+            <div>
+                <textarea class="form-control"  rows="3" placeholder="input the state..." name="state_text" style="width: auto">{{ old('content') }}</textarea>
+            </div>
+        </div>
+        <div>
             Start_date:<input type="date" value="2018-12-12" name="begin_date"/>
             End_date:<input type="date" value="2018-12-12" name="end_date"/>
         </div>

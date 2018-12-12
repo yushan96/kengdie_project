@@ -36,6 +36,11 @@ class Note extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class,$this->primaryKey,'noteid')->get();
+        return $this->hasMany(Comment::class,$this->primaryKey,'noteid');
+    }
+
+    public function states()
+    {
+        return $this->belongsToMany(State::class,'Note_State','noteid','stateid');
     }
 }

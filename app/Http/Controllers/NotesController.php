@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note_State;
+use App\Models\State;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Note;
@@ -28,7 +30,7 @@ class NotesController extends Controller
             'notetext' => 'required|max:1000',
         ]);
 
-        $uid=Auth::user()->id;
+        $uid=Auth::user()->uid;
 
         $note=Auth::user()->notes()->create([
             'uid' => $uid,
@@ -77,6 +79,32 @@ class NotesController extends Controller
             $noterepeat->save();
             session()->flash('success', $request->interval);
         }
+
+        $state=$request->state_text;
+        if(!empty($state))
+        {
+            $stateid=0;
+            $newstate=new State();
+            $newstate->uid=$uid;
+            $newstate->state_text=$state;
+            if(count(State::where('uid','=',$uid)->where('state_text','=',$state)->get())>0){
+                $stateid=State::where('uid','=',$uid)->where('state_text','=',$state)->first()->stateid;
+            }
+            else
+            {
+                $newstate->save();
+                $stateid=$newstate->stateid;
+            }
+
+            $newnote_state=new Note_State();
+            $newnote_state->noteid=$noteid;
+            $newnote_state->stateid=$stateid;
+            $newnote_state->save();
+        }
+
+
+        $notestate=new Note_State();
+
 
         return redirect()->route('users.show',Auth::user()->uid);
     }

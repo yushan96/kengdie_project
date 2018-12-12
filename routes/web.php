@@ -32,3 +32,5 @@ Route::get('/notes/{note}/tags','NotesController@tags')->name('notes.tags');
 Route::get('/users/{user}/friends','UserController@friends')->name('user.friends');
 Route::delete('/users/{user}/friends','UserController@unfriend')->name('user.unfriend');
 
+Route::resource('comments','CommentsController', ['only' => ['store', 'destroy']]);
+

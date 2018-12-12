@@ -27,7 +27,12 @@ class Comment extends Model
 
     public function user()
     {
+        return $this->belongsTo(User::class,'uid');
+    }
 
+    public function reply()
+    {
+        return $this->belongsTo(Comment::class,'commentid');
     }
 
 }

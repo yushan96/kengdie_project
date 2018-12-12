@@ -12,7 +12,7 @@ class UserPolicy
 
     public function update(User $currentUser, User $user)
     {
-        return $currentUser->id === $user->id;
+        return $currentUser->uid === $user->uid;
     }
 
     public function destroy(User $currentUser, User $user)
