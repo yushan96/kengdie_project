@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\User;
+use App\Models\Friendship;
+use Auth;
 
 class UserController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store','index']
         ]);
 
         $this->middleware('guest', [
@@ -29,6 +31,15 @@ class UserController extends Controller
     {
         return view('users.create');
     }
+
+    public function destroy(User $user)
+    {
+        $this->authorize('destroy',$user);
+        $user->delete();
+        session()->flash('success', '成功删除用户！');
+        return back();
+    }
+
     public function show(User $user)
     {
         $notes=$user->notes()->orderBy('created_at','desc')->paginate(10);
@@ -82,6 +93,20 @@ class UserController extends Controller
         return redirect()->route('/', $user->uid);
     }
 
+    public function friends(User $user)
+    {
+        $friends=$user->friends()->paginate(30);
+        $title='friend list';
+        return view('users.show_friends',compact('friends','title'));
 
+    }
+
+    public function unfriend(User $user)
+    {
+//        $this->authorize('unfriend','user');
+        Friendship::unfriend(Auth::user(),$user);
+        session()->flash('success', 'unfriend success！');
+        return redirect()->back();
+    }
     //
 }

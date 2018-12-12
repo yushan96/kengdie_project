@@ -40,5 +40,49 @@ class User extends Authenticatable
         return $this->notes()->orderBy('created_at','desc');
     }
 
+    public function gravatar($size = '100')
+    {
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+        return "http://www.gravatar.com/avatar/$hash?s=$size";
+    }
+
+    public function friends()
+    {
+//        status=1 代表accepted
+        return $this->belongsToMany(User::class, 'friendships', 'uid1', 'uid2')
+            ->where('status', '=', 1)
+            ->withTimestamps()->withPivot('status');
+//        $friendID=Friendship::where('uid1','=',$this->uid)->where('status','=',1)->pluck('uid2')->toArray();
+//        return User::whereIn('uid',$friendID)->get();   //直接取出全部User
+    }
+
+    public function deleteFriend($user_ids)
+    {
+        if(!is_array($user_ids))  {
+            $this_ids=compact('user_ids');
+
+        }
+        $this->friends()->detach($user_ids);
+//        Friendship::where('uid1', $this->uid)->where('uid2', $user_id)->delete();
+    }
+
+    public function isFriend($user_id)
+    {
+
+        foreach ($this->friends() as $friend) {
+            if ($friend->uid === $user_id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function requests()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'uid1', 'uid2')
+            ->where('status', '=', 0)
+            ->withTimestamps()->withPivot('status');
+    }
+
 
 }
