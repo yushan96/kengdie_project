@@ -26,6 +26,6 @@ class NoteRepeat extends Model
 
     public function notes()
     {
-        return $this->belongsTo(Note::class,'noteid','','')->get();
+        return $this->belongsTo(Note::class,'noteid','','');
     }
 }

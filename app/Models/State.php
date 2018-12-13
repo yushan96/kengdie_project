@@ -24,4 +24,9 @@ class State extends Model
     {
         return $this->belongsToMany(Note::class,'Note_State','stateid','noteid')->get();
     }
+
+    public function filters()
+    {
+        return $this->belongsToMany(Filter::class,'Filter_State','stateid','filter_id')->get();
+    }
 }

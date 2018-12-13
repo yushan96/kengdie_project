@@ -23,4 +23,9 @@ class Tag extends Model
         return $this->belongsToMany(Note::class,'Note_Tag','tid','noteid')->get();
     }
 
+    public function filters()
+    {
+        return $this->belongsToMany(Filter::class,'Filter_Tag','tid','filter_id')->get();
+    }
+
 }
