@@ -88,4 +88,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function filters()
+    {
+        return $this->hasMany(Filter::class,$this->primaryKey,'uid');
+    }
 }
