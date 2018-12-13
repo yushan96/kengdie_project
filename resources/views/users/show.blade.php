@@ -18,6 +18,8 @@
                         @endforeach
                     </ol>
                     {!! $notes->render() !!}
+                    @else
+                    <div class="alert alert-warning" role="alert">Wooops, you have no note, try to create one or find others notes</div>
                 @endif
             </div>
 

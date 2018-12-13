@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>@yield('title','test')-加点啥</title>
+        <title>@yield('title','test')</title>
         <link rel="stylesheet" href="/css/app.css">
     </head>
     <body>
