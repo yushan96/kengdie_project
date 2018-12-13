@@ -28,6 +28,7 @@ class NotesController extends Controller
     {
         $this->validate($request, [
             'notetext' => 'required|max:1000',
+            'permission'=>'required',
         ]);
 
         $uid=Auth::user()->uid;
@@ -48,13 +49,16 @@ class NotesController extends Controller
 
         $tag=$request->input('tag');
 
-        # todo 无tag会报错
-        foreach ($tag as $tagid){
-            $note_tag = new Note_Tag;
-            $note_tag->noteid = $noteid;
-            $note_tag->tid = $tagid;
-            $note_tag->save();
+        if(empty($tag))
+        {
+            foreach ($tag as $tagid){
+                $note_tag = new Note_Tag;
+                $note_tag->noteid = $noteid;
+                $note_tag->tid = $tagid;
+                $note_tag->save();
+            }
         }
+
 
         if($request->repeat_year>0 || $request->repeat_month>0 || $request->week>0){
             $noterepeat=new NoteRepeat;
