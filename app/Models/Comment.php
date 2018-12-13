@@ -32,7 +32,7 @@ class Comment extends Model
 
     public function reply()
     {
-        return $this->belongsTo(Comment::class,'commentid');
+        return $this->belongsTo(Comment::class,'replyid');
     }
 
 }

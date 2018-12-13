@@ -16,7 +16,7 @@ class Note extends Model
 
     protected $primaryKey='noteid';
 
-    protected $fillable=['notetext','permission','begin_date','end_date'];
+    protected $fillable=['notetext','permission','begin_date','end_date','longitude','latitude','radius','geohash'];
 
 
     public function user()

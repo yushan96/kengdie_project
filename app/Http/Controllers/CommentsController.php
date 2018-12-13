@@ -43,4 +43,27 @@ class CommentsController extends Controller
 
         return redirect()->back()->with('success', '删除成功！');
     }
+
+    public function replystore(Request $request,Comment $comment)
+    {
+        $this->validate($request, [
+            'commenttext' => 'required|max:1000',
+        ]);
+        $comment->commenttext = $request->commenttext;
+        $comment->uid = Auth::user()->uid;
+        $comment->noteid = $request->noteid;
+        $comment->replyid=$request->commentid;
+        $comment->save();
+
+        return redirect()->back()->with('success', '创建成功！');
+    }
+
+    public function replydestroy(Comment $comment)
+    {
+        $this->authorize('destroy', $comment);
+        $comment->delete();
+
+        return redirect()->back()->with('success', '删除成功！');
+    }
+
 }

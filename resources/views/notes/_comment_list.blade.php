@@ -14,8 +14,8 @@
 
                     {{-- 回复删除按钮 --}}
                     @can('destroy', $comment)
-                    <span class="meta pull-right">
-                        <form action="{{ route('comments.destroy', $comment->commentid) }}" method="post">
+                        <span class="meta pull-right">
+                        <form action="{{ route('replydestroy', $comment->commentid) }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-default btn-xs pull-left">
@@ -27,10 +27,6 @@
                 </div>
                 <div class="reply-content">
                     {!! $comment->commenttext !!}
-                    @if(empty($comment->reply()->first()))
-                    @else
-                        #to:{{$comment->reply()->first()->user()->first()->uname}}
-                    @endif
                 </div>
                 @include('notes._comment_box',$comment)
             </div>

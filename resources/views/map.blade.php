@@ -1,28 +1,26 @@
-@extends('layouts.default')
+{{--@extends('layouts.default')--}}
 
-<html>
-<head>
-    <title>Google Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-        #map {
-            height: 300px;
-            width: 600px;
-        }
-    </style>
-</head>
-<body>
-{{--<div id="latclicked"></div>--}}
-{{--<div id="longclicked"></div>--}}
+{{--<html>--}}
+{{--<head>--}}
+    {{--<title>Google Map</title>--}}
+    {{--<meta name="viewport" content="initial-scale=1.0">--}}
+    {{--<meta charset="utf-8">--}}
 
-{{--<div id="latmoved"></div>--}}
-{{--<div id="longmoved"></div>--}}
+{{--</head>--}}
+{{--<body>--}}
+
 
 <div style="padding:10px">
-    <div id="map"></div>
+    <div id="map"  style="width:1000px;height:300px;" >
+        {{--<style>--}}
+            {{--#map {--}}
+                {{--height: 300px;--}}
+                {{--width: 1000px;--}}
+            {{--}--}}
+        {{--</style>--}}
+    </div>
 </div>
-<form action=# method="POST">
+{{--<form action=# method="POST">--}}
     <div class="form-group">
         <label for="name"> latitude: </label>
         <input type="text" name="latitude" id="latclicked" value="">
@@ -32,8 +30,8 @@
         <input type="text" name="longitude" id="longclicked" value="">
     </div>
 
-    <button type="submit" class="btn btn-primary">Sign up</button>
-</form>
+    {{--<button type="submit" class="btn btn-primary">Sign up</button>--}}
+{{--</form>--}}
 
 <script type="text/javascript">
     var map;
@@ -112,5 +110,5 @@
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTK5dYiCSBUXQQH00IKHgeWVL5a2pKCf4&callback=initMap"
         async defer></script>
-</body>
-</html>
+{{--</body>--}}
+{{--</html>--}}

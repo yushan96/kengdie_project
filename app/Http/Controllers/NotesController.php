@@ -38,6 +38,9 @@ class NotesController extends Controller
             'begin_date'=>$request->begin_date,
             'end_date'=>$request->end_date,
             'permission'=>$request->permission,
+            'longitude'=>floatval($request->longitude),
+            'latitude'=>floatval($request->latitude),
+            'radius'=>$request->radius,
             'created_at'=>date('Y-m-d H:i:s'),
         ]);
 

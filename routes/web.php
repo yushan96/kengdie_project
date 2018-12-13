@@ -41,6 +41,8 @@ Route::delete('/users/{user}/friend-requests','FriendshipController@denyRequest'
 Route::get('/map','UserController@map')->name('map');
 
 Route::resource('comments','CommentsController', ['only' => ['store', 'destroy']]);
+Route::post('reply/store','CommentsController@replystore')->name('replystore');
+Route::post('reply/destory','CommentsController@replydestroy')->name('replydestroy');
 
 Route::get('/filter','FilterController@show')->name('filter.show');
 //Route::post('/filter','FilterController@filter')->name('filter.filter');
