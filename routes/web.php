@@ -42,4 +42,10 @@ Route::get('/map','UserController@map')->name('map');
 
 Route::resource('comments','CommentsController', ['only' => ['store', 'destroy']]);
 
+Route::get('/filter','FilterController@show')->name('filter.show');
+//Route::post('/filter','FilterController@filter')->name('filter.filter');
+Route::resource('filter', 'FilterController', ['only' => ['create','store', 'destroy']]);
+Route::post('/filter_keyword','FilterController@filter_keyword')->name('filter.keyword');
+
+
 

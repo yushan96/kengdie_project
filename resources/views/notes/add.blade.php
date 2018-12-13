@@ -20,7 +20,7 @@
             </div>
             <br>
             <div>
-                <textarea class="form-control"  rows="3" placeholder="input the state..." name="state_text" style="width: auto">{{ old('content') }}</textarea>
+                <textarea class="form-control"  rows="3" placeholder="input the state..." name="state_text" style="width: auto"></textarea>
             </div>
         </div>
         <div>

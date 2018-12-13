@@ -1,7 +1,7 @@
 <li id="note-{{ $note->noteid }}">
     <a href="{{ route('users.show', $user->uid )}}"></a>
     <span class="user">
-    <a href="{{ route('users.show', $user->uid )}}">{{ $user->uname }}</a>
+    <a href="{{ route('users.show', $note->user()->first()->uid )}}">{{ $note->user()->first()->uname }}</a>
   </span>
     <div>
         <div>

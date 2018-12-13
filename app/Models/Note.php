@@ -26,12 +26,12 @@ class Note extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class,'Note_Tag','noteid','tid')->get();
+        return $this->belongsToMany(Tag::class,'Note_Tag','noteid','tid');
     }
 
     public function repeats()
     {
-        return $this->hasMany(NoteRepeat::class,$this->primaryKey,'noteid')->get();
+        return $this->hasMany(NoteRepeat::class,$this->primaryKey,'noteid');
     }
 
     public function comments()
