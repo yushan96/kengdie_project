@@ -14,7 +14,13 @@ class Friendship extends Model
 
     static public function isFriend(User $user1, User $user2)
     {
-        $friendship=Friendship::where('uid1','=',$user1->uid)->where('uid2','=',$user2->uid)->where('status','=',1)->get();
+        //为了简单起见，如果没有同意的话，也不准在发好友请求了
+        $friendship=Friendship::where('uid1','=',$user2->uid)->where('uid2','=',$user1->uid)
+            ->where(function($query){
+                $query->where('status','=',1)
+                    ->orWhere('status','=',0);
+            })->get();
+
         if (count($friendship)>0){
             return true;
         }

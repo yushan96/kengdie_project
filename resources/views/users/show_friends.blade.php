@@ -9,13 +9,16 @@
                 <li>
                     <img src="{{ $friend->gravatar() }}" alt="{{ $friend->uname }}" class="gravatar"/>
                     <a href="{{ route('users.show', $friend->uid )}}" class="username">{{ $friend->uname }}</a>
+                    <div align="right">
+                        <form action="{{route('user.unfriend',$friend->uid)}}" method="POST">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button type="'submit" class="btn btn-sm btn-danger friendship-delete-btn">Delete</button>
+                        </form>
+                    </div>
+
                 </li>
 
-                <form action="{{route('user.unfriend',$friend->uid)}}" method="POST">
-                    {{csrf_field()}}
-                    {{method_field('DELETE')}}
-                    <button type="'submit" class="btn btn-sm btn-danger friendship-delete-btn">Delete</button>
-                </form>
             @endforeach
 
 

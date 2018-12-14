@@ -26,13 +26,27 @@ class FriendshipController extends Controller
     public function acceptRequest(User $user, Request $request)
     {
         $friendship=Friendship::where('uid1','=',Auth::user()->uid)->
-            where('uid2',$user->uid)->first();
+            where('uid2',$user->uid)->get();
 
-        $friendship->status=1;
-        $friendship->save();
+        foreach($friendship as $friend){
+            $friend->delete();
+        }
+        $friendship=Friendship::where('uid2','=',Auth::user()->uid)->
+        where('uid1',$user->uid)->get();
+
+        foreach($friendship as $friend){
+            $friend->delete();
+        }
+//        $friendship->status=1;
+//        $friendship->save();
         Friendship::create([
             'uid1'=>$user->uid,
             'uid2'=>Auth::user()->uid,
+            'status'=>1,
+        ]);
+        Friendship::create([
+            'uid2'=>$user->uid,
+            'uid1'=>Auth::user()->uid,
             'status'=>1,
         ]);
         session()->flash('success','Accept friend request success!');

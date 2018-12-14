@@ -5,14 +5,14 @@
             <nav>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::check())
-                        <li><a href="{{ route('users.index') }}">User list</a></li>
+                        <li><a href="{{ route('users.index') }}">User List</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 {{ Auth::user()->uname }} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('users.show',Auth::user()->uid) }}">personal</a> </li>
-                                <li><a href="{{ route('users.edit', Auth::user()->uid) }}">Edit profile</a></li>
+                                <li><a href="{{route('users.show',Auth::user()->uid) }}">Person Page</a> </li>
+                                <li><a href="{{ route('users.edit', Auth::user()->uid) }}">Edit Profile</a></li>
                                 <li><a href="{{route('user.friends',Auth::user()->uid)}}">Friends </a></li>
                                 <li><a href="{{route('friendship.requests',Auth::user()->uid)}}">Friends Request</a></li>
 

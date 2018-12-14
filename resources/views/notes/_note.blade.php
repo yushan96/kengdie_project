@@ -1,5 +1,5 @@
 <li id="note-{{ $note->noteid }}">
-    <a href="{{ route('users.show', $user->uid )}}"></a>
+    {{--<a href="{{ route('users.show', $user->uid )}}"></a>--}}
     <span class="user">
     <a href="{{ route('users.show', $note->user()->first()->uid )}}">{{ $note->user()->first()->uname }}</a>
   </span>
@@ -9,7 +9,7 @@
             <div>
                 Note content: <span class="content">{{ $note->notetext }}</span>
 
-                @include('notes.show_tag',$tags=$note->tags())
+                @include('notes.show_tag',$tags=$note->tags()->get())
 
                 {{--<form action="{{route('notes.tags',$note->noteid)}}" method="get">--}}
                 {{--{{ csrf_field() }}--}}

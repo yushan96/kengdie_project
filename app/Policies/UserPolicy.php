@@ -28,7 +28,7 @@ class UserPolicy
     public function befriend(User $currentUser, User $user)
     {
         //todo 如果是已经发送请求了，区分一下
-        return !Friendship::isFriend($currentUser,$user);
+        return !Friendship::isFriend($currentUser,$user) && $currentUser->uid != $user->uid;
     }
 
 }

@@ -1,6 +1,13 @@
 <li>
+
+
+
+
     <img src="{{ $user->gravatar() }}" alt="{{ $user->uname }}" class="gravatar"/>
-    <a href="{{ route('users.show', $user->uid )}}" class="username">{{ $user->uname }}</a>
+    <div>
+        <a href="{{ route('users.show', $user->uid )}}" class="username">{{ $user->uname }}</a>
+
+    </div>
 
     @can('destroy', $user)
         <form action="{{ route('users.destroy', $user->uid) }}" method="post">
@@ -10,10 +17,16 @@
         </form>
     @endcan
 
-    @can('befriend',$user)
-        <form action="{{route('user.befriend',$user->uid)}}" method="POST">
-            {{csrf_field()}}
-            <button type="submit" class="btn">Add Friend</button>
-        </form>
-    @endcan
+    <div align="right">
+
+        @can('befriend',$user)
+            <form action="{{route('user.befriend',$user->uid)}}" method="POST">
+                {{csrf_field()}}
+                <button type="submit" class="btn btn-sm">Add Friend</button>
+            </form>
+        @endcan
+    </div>
+
+
+
 </li>
