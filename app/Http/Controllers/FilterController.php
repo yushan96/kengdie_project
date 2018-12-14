@@ -46,7 +46,9 @@ class FilterController extends Controller
 
     public function create()
     {
-        return view('filters.create');
+        $user=Auth::user();
+        $filter=Filter::get_lastest_filter($user);
+        return view('filters.create',compact('filter'));
     }
 
 
@@ -61,7 +63,7 @@ class FilterController extends Controller
         $state=$request->state;
         $time=$request->time;
         $date=$request->date;
-        $keywords=$request->keywords;
+//        $keywords=$request->keywords;
 
         $location_filter=new Filter_location();
         $location_filter->latitude=$latitude;
@@ -81,20 +83,19 @@ class FilterController extends Controller
         ]);
 
         $filter_id=$filter->filter_id;
-        foreach($tags as $tag)
+        if($tags)
         {
-            $filter_tag=new Filter_Tag;
-            $filter_tag->filter_id=$filter_id;
-            $filter_tag->tid=$tag;
-            $filter_tag->save();
+            foreach($tags as $tag)
+            {
+                $filter_tag=new Filter_Tag;
+                $filter_tag->filter_id=$filter_id;
+                $filter_tag->tid=$tag;
+                $filter_tag->save();
+            }
         }
 
 
-
-
-
-
-
+        return redirect('filter');
     }
 
 }

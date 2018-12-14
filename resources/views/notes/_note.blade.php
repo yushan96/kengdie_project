@@ -9,12 +9,8 @@
             <div>
                 Note content: <span class="content">{{ $note->notetext }}</span>
 
-                @include('notes.show_tag',$tags=$note->tags())
+                @include('notes.show_tag',$tags=$note->tags()->get())
 
-                {{--<form action="{{route('notes.tags',$note->noteid)}}" method="get">--}}
-                {{--{{ csrf_field() }}--}}
-                {{--<button type="submit" class="btn btn-sm btn-danger status-delete-btn">See tags</button>--}}
-                {{--</form>--}}
                 @can('destroy',$note)
                     <form action="{{route('notes.destroy',$note->noteid)}}" method="post">
                         {{ csrf_field() }}
