@@ -60,7 +60,7 @@ class Filter extends Model
 
     static public function get_notes_by_location($location)
     {
-        return Note::all();
+//        return Note::all();
 
         $longitude=$location->longitude;
         $latitude=$location->latitude;

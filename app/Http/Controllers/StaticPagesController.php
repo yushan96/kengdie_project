@@ -16,8 +16,8 @@ class StaticPagesController extends Controller
 //        {
 //            $feed_items=Auth::user()->feed()->paginate(10);
 //        }
-        return redirect()->route('users.show', [Auth::user()]);
-//        return view('static_pages/home', compact('feed_items'));
+//        return redirect()->route('home', [Auth::user()]);
+        return view('static_pages/home', compact('feed_items'));
     }
     //
 }

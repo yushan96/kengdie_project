@@ -105,7 +105,7 @@
 
                     <div class="form-group">
                         <label for="from_who"><span class="label label-primary">radius：</span></label>
-                        <input placeholder="{{$filter->location->radius}}" type="number" name="radius" value=0 max=5000>m
+                        <input placeholder="{{$filter->location->radius}}" type="number" name="radius" value={{$filter->location->radius}} max=5000>m
                     </div>
 
 

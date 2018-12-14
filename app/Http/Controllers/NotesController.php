@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Geohash;
 use App\Models\Note_State;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -41,6 +42,7 @@ class NotesController extends Controller
             'permission'=>$request->permission,
             'longitude'=>floatval($request->longitude),
             'latitude'=>floatval($request->latitude),
+            'geohash'=>Geohash::encode($request->latitude,$request->longitude),
             'radius'=>$request->radius,
             'created_at'=>date('Y-m-d H:i:s'),
         ]);
@@ -49,7 +51,7 @@ class NotesController extends Controller
 
         $tag=$request->input('tag');
 
-        if(empty($tag))
+        if(!empty($tag))
         {
             foreach ($tag as $tagid){
                 $note_tag = new Note_Tag;

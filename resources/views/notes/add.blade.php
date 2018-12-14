@@ -35,8 +35,6 @@
                 Start_date:<input type="date" value="2018-12-12" name="begin_date"/>
                 End_date:<input type="date" value="2018-12-12" name="end_date"/>
 
-                <textarea class="form-control"  rows="3" placeholder="input the state..." name="state_text" style="width: auto"></textarea>
-
             </div>
             <div><span class="label label-primary">Set permission:</span></div>
             <div class="col-md-8">
