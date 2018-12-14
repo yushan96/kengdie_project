@@ -4,11 +4,11 @@
     @if (Auth::check())
         <div class="row">
             <div class="col-md-8">
-                {{--<section class="notes_form">--}}
-                    {{--@include('shared._note_form')--}}
-                {{--</section>--}}
-                <h3>Note list</h3>
-                @include('shared._feed')
+                <section class="notes_form">
+                    @include('notes._note')
+                </section>
+                {{--<h3>Note list</h3>--}}
+                {{--@include('shared._feed')--}}
             </div>
             <aside class="col-md-4">
                 <section class="user_info">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\User;
 use App\Models\Friendship;
+use App\Models\Filter;
 use Auth;
 
 class UserController extends Controller
@@ -60,6 +61,18 @@ class UserController extends Controller
             'uaddress'=>$request->address,
             'password'=>bcrypt($request->password),
         ]);
+
+        $filter=new Filter();
+        $filter->filter_name="new filter";
+        $filter->uid=$user->uid;
+        $filter->from_who=0;
+        $filter->location_filter_id=1;
+        $filter->time="12:00:00";
+        $filter->date="2018-12-14";
+        $filter->state="";
+        $filter->created_at=date("Y-m-d H:i:s");
+        $filter->updated_at=date("Y-m-d H:i:s");
+        $filter->save();
 
         session()->flash('Success','Welcome to oingo');
         return redirect()->route('users.show',[$user]);

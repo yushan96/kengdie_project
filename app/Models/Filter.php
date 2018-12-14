@@ -60,7 +60,7 @@ class Filter extends Model
 
     static public function get_notes_by_location($location)
     {
-//        return Note::all();
+        return Note::all();
 
         $longitude=$location->longitude;
         $latitude=$location->latitude;
@@ -249,9 +249,9 @@ class Filter extends Model
                         }
                     }
                     elseif (($repeat->repeat_year==0 || $repeat->repeat_year==(date("Y",strtotime($note->begin_date))-date("Y",strtotime($date))))
-                        && ($repeat->repeat_month==0 || $repeat->repeat_month==date("n",$note->begin_date))
-                        && ($repeat->repeat_week==0 || $repeat->repeat_week==ceil(date("j",$note->begin_date)/7))
-                        && ($repeat->repeat_weekday==0 || $repeat->repeat_weekday==date("N",$note->begin_date)))
+                        && ($repeat->repeat_month==0 || $repeat->repeat_month==date("n",strtotime($date)))
+                        && ($repeat->repeat_week==0 || $repeat->repeat_week==ceil(date("j",strtotime($date))/7))
+                        && ($repeat->repeat_weekday==0 || $repeat->repeat_weekday==date("N",strtotime($date))))
                     {
                         array_push($filtered_notes,$note);
                     }
@@ -271,17 +271,16 @@ class Filter extends Model
 
     static public function get_valid_notes($user)
     {
-//        $geohash=Log::get_lastest_geohash($user);
+        $geohash=Log::get_lastest_geohash($user);
         $filter=self::get_lastest_filter($user);        //因为每次调用一定会在log中写入文件，可以保证一定会有一个filter返回
 
-        $notes=self::get_notes_by_location($filter->location()->first());
 
-//        $notes=self::filter_by_from_who($notes,$filter->from_who,$user);
-//        $notes=self::filter_by_permission($notes,$user);
-//        $notes=self::filter_by_tags($notes,$filter->tags());
-//
-//        $notes=self::filter_by_states($notes,$filter->state);
-//        $notes=self::filter_by_time($notes,$filter->time,$filter->date);
+        $notes=self::get_notes_by_location($filter->location()->first());
+        $notes=self::filter_by_from_who($notes,$filter->from_who,$user);
+        $notes=self::filter_by_permission($notes,$user);
+        $notes=self::filter_by_tags($notes,$filter->tags());
+        $notes=self::filter_by_states($notes,$filter->state);
+        $notes=self::filter_by_time($notes,$filter->time,$filter->date);
         return $notes;
 
     }
