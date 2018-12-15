@@ -28,10 +28,9 @@ class FilterController extends Controller
 
     public function show()
     {
-
         $user=Auth::user();
-
         $notes=Filter::get_valid_notes($user);
+
         return  view('users.show_filter',compact('notes','user'));
     }
 
@@ -40,8 +39,7 @@ class FilterController extends Controller
         $user=Auth::user();
         $notes=Filter::get_filtered_notes($user);
         $keyword=$request->keyword;
-        $notes=Filter::filter_by_keyword($notes,$keyword);
-        return  view('show_filter',compact('notes','user'));
+        return  view('users.show_filter',compact('notes','user'));
     }
 
     public function create()
@@ -63,7 +61,7 @@ class FilterController extends Controller
         $state=$request->state;
         $time=$request->time;
         $date=$request->date;
-//        $keywords=$request->keywords;
+        $keywords=$request->keywords;
 
         $location_filter=new Filter_location();
         $location_filter->latitude=$latitude;
@@ -79,7 +77,7 @@ class FilterController extends Controller
             'time'=>$time,
             'date'=>$date,
             'state'=>$state,
-
+            'keyword'=>$keywords,
         ]);
 
         $filter_id=$filter->filter_id;
@@ -94,8 +92,9 @@ class FilterController extends Controller
             }
         }
 
-
+//        return redirect()->action('FilterController@show',['keyword'=>$keywords]);
         return redirect('filter');
+//        return redirect()->route('filter.show',['keywords'=>$keywords]);
     }
 
 }

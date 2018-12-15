@@ -64,29 +64,6 @@ class FriendshipController extends Controller
     }
 
 
-
-
-//    public function request($user_id)
-//    {
-//        return $this->
-//
-////        todo: 如果已经存在在表当中了呢
-//        $newFriendship = new Friendship;
-//        $newFriendship->uid1 = $this->uid;
-//        $newFriendship->uid2 = $user_id;
-//        $newFriendship->status = 0;
-//        $newFriendship->save();
-//    }
-//
-//    public function acceptFriend($user_id)
-//    {
-//
-//    }
-//
-//    public function denyFriend($user_id)
-//    {
-//
-//    }
     public function newFriends()
     {
         return $this->belongsToMany(User::class, 'friendships','uid1','uid2')

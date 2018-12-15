@@ -11,13 +11,13 @@ class StaticPagesController extends Controller
 {
     public function home()
     {
-//        $feed_items=[];
-//        if(Auth::check())
-//        {
-//            $feed_items=Auth::user()->feed()->paginate(10);
-//        }
+        $notes=[];
+        if(Auth::check())
+        {
+            $notes=Auth::user()->notes()->paginate(10);
+        }
 //        return redirect()->route('home', [Auth::user()]);
-        return view('static_pages/home', compact('feed_items'));
+        return view('static_pages/home', compact('notes'));
     }
     //
 }

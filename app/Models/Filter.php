@@ -17,7 +17,7 @@ class Filter extends Model
 
     protected $primaryKey='filter_id';
 
-    protected $fillable=['uid','filter_name','from_who','location_filter_id','state','time','date'];
+    protected $fillable=['uid','filter_name','from_who','location_filter_id','state','time','date','keyword'];
 
 
     public function tags()
@@ -160,6 +160,9 @@ class Filter extends Model
 
     static public function filter_by_keyword($notes,$keyword)
     {
+        if(!$keyword){
+            return $notes;
+        }
         $filtered_notes=[];
         foreach ($notes as $note){
             if(strstr($note->notetext,$keyword)){
@@ -281,6 +284,8 @@ class Filter extends Model
         $notes=self::filter_by_tags($notes,$filter->tags());
         $notes=self::filter_by_states($notes,$filter->state);
         $notes=self::filter_by_time($notes,$filter->time,$filter->date);
+        $notes=self::filter_by_keyword($notes,$filter->keyword);
+
         return $notes;
 
     }

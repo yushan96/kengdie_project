@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Models\User;
 use App\Models\Friendship;
 use App\Models\Filter;
+use App\Models\Note;
+
 use Auth;
 
 class UserController extends Controller
@@ -132,6 +134,11 @@ class UserController extends Controller
 
     public function map()
     {
-        return view('map');
+//        $notes=[];
+//        foreach (Note::all() as $note){
+//            array_push($notes,$note->toJson());
+//        }
+        $notes=Note::all();
+        return view('map',compact('notes'));
     }
 }

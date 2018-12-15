@@ -16,7 +16,7 @@
     </ul>
 
 @else
-    <div class="empty-block">暂无数据 ~_~ </div>
+    <div class="empty-block">There is no data right now ~_~ </div>
 @endif
 
 {{-- 分页 --}}
